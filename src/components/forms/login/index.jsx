@@ -14,7 +14,7 @@ const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState('');
-    const [userID, seetuserID] = useState('')
+    const [userID, setuserID] = useState('')
     const [showPass, setShowPass] = useState(false);
 
     const navigate = useNavigate();
@@ -28,7 +28,7 @@ const LoginForm = () => {
             if (email !== '' && password !== '') {
                 const res = await handleEmailSignUp(email, password);
 
-                // seetuserID(res.user.uid)
+                setuserID(res.user.uid)
                 console.log('res: ', res?.user?.uid)
                 console.log('currentUser: ', currentUser)
 

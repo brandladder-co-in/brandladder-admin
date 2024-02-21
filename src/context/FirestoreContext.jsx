@@ -89,8 +89,8 @@ export function FirestoreProvider({ children }) {
 
     const deleteDocument = async (collectionName, docId) => {
         try {
-            await deleteDoc(doc(db, collectionName, docId));
-            console.log("Document with ID: ", docId, " deleted successfully!");
+            const res = await deleteDoc(doc(db, collectionName, docId));
+            return res;
         } catch (error) {
             console.error("Error deleting document: ", error);
         }

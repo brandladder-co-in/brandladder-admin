@@ -127,9 +127,9 @@ const BlogDtls = () => {
                         required
                     >
                         <option value="Default">Default</option>
-                        <option value="Technology">Technology</option>
-                        <option value="Marketing">Marketing</option>
-                        <option value="Digital Service">Digital Service</option>
+                        <option value="tech_services">Technology</option>
+                        <option value="digital_services">Digitial Services</option>
+                        <option value="ca_services">CA and Registration Service</option>
                     </select>
                 </div>
             </form>

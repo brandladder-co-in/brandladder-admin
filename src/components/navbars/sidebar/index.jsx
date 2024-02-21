@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
+import useEmailAuth from '../../../hooks/auth/useEmailAuth';
 import LogoutModal from '../../modal/logout-modal';
 import Alert from '../../tosters/alert';
 
@@ -8,6 +9,8 @@ import { CiDatabase, CiHome } from "react-icons/ci";
 import { FaRegFileExcel } from "react-icons/fa";
 
 const SidebarNavigation = ({ children }) => {
+
+    const { currentUser } = useEmailAuth();
 
     return (
         <div className="sticky flex h-screen flex-row gap-4 overflow-y-auto rounded-lg sm:overflow-x-hidden">
@@ -73,7 +76,7 @@ const SidebarNavigation = ({ children }) => {
             </aside>
             <div className="px-2 py-5 w-full h-full">
                 <div className="mb-4">
-                    <Alert />
+                    <Alert user={currentUser?.email} />
                 </div>
                 {children}
             </div>

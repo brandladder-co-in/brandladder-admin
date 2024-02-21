@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
+import useEmailAuth from '../../../hooks/auth/useEmailAuth';
 import Loader from '../../../components/loader/dotedCircel'
 
 const LogoutModal = () => {
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const { handleSignOut } = useEmailAuth();
 
     const handleCloseModal = async () => {
         try {
@@ -22,7 +24,8 @@ const LogoutModal = () => {
     const handleLogout = async () => {
         setLoading(true);
         try {
-            // fun main
+            await handleSignOut();
+            navigate('/')
         } catch (error) {
             console.error('Error logging out:', error);
         } finally {
