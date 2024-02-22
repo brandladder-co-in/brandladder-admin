@@ -5,7 +5,8 @@ import useEmailAuth from '../../../hooks/auth/useEmailAuth';
 import LogoutModal from '../../modal/logout-modal';
 import Alert from '../../tosters/alert';
 
-import { CiDatabase, CiHome } from "react-icons/ci";
+import { GrArticle } from "react-icons/gr";
+import { CiDatabase } from "react-icons/ci";
 import { FaRegFileExcel } from "react-icons/fa";
 
 const SidebarNavigation = ({ children }) => {
@@ -23,12 +24,6 @@ const SidebarNavigation = ({ children }) => {
                         <section className="menu-section px-4">
                             <span className="menu-title">Main menu</span>
                             <ul className="menu-items">
-                                <li className="menu-item">
-                                    <Link to='/dashboard' className='flex' >
-                                        <CiHome className='my-auto mx-2' />
-                                        <span>Dashboard</span>
-                                    </Link>
-                                </li>
 
                                 <li className="menu-item">
                                     <Link to='/dashboard/add-blogs' className='flex' >
@@ -39,7 +34,7 @@ const SidebarNavigation = ({ children }) => {
 
                                 <li className="menu-item">
                                     <Link to='/dashboard/blogs' className='flex' >
-                                        <CiDatabase className='my-auto mx-2' />
+                                        <GrArticle className='my-auto mx-2' />
                                         <span>All Blogs</span>
                                     </Link>
                                 </li>

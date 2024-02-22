@@ -7,7 +7,7 @@ import EditModal from '../../../components/modal/editblog-modal/';
 import { FaEdit, FaEye } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 
-const BlogCard = ({ id, title, desc, domain, img, author, content }) => {
+const BlogCard = ({ id, title, desc, domain, img, metaTags, content }) => {
 
     const { deleteDocument: deleteBlog } = useFirestore();
 
@@ -41,16 +41,16 @@ const BlogCard = ({ id, title, desc, domain, img, author, content }) => {
                 <div className="card-body grid grid-cols-3">
                     <div className='col-span-2'>
                         <h2 className="card-header">{title}</h2>
-                        {/* <span className="">{domain}</span> */}
+                        <span className="badge badge-outline-secondary">{domain}</span>
                         <p className="text-content2">{truncatedDesc}</p>
                     </div>
-                    <div className="card-footer col-span-1">
+                    <div className="card-footer col-span-1 space-x-3 flex-wrap mx-auto text-center">
                         {/* <button className="btn-outline-secondary btn"><FaEdit /> </button> */}
                         <div className="popover popover-hover">
                             <label
-                                className="popover-trigger my-2 btn btn-outline-secondary"
-                                htmlFor="editblog-modal">
-                                <FaEdit />
+                                className="popover-trigger btn-sm btn-outline-secondary"
+                                htmlFor={id}>
+                                <FaEdit className='my-auto' />
                             </label>
                             <div className="popover-content">
                                 <div className="popover-arrow"></div>
@@ -58,17 +58,19 @@ const BlogCard = ({ id, title, desc, domain, img, author, content }) => {
                             </div>
                         </div>
                         <div className="popover popover-hover">
-                            <label className="popover-trigger my-2 btn btn-outline-secondary"><FaEye /></label>
+                            <label className="popover-trigger btn-sm btn-outline-secondary menu-item-disabled">
+                                <FaEye className='my-auto' />
+                            </label>
                             <div className="popover-content">
                                 <div className="popover-arrow"></div>
-                                <div className="p-4 text-sm">See {title}</div>
+                                <div className="p-4 text-sm">See {title} (disabled for now)</div>
                             </div>
                         </div>
                         <div className="popover popover-hover">
                             <label
-                                className="popover-trigger my-2 btn btn-outline-error"
+                                className="popover-trigger btn-sm btn-outline-error"
                                 onClick={handleDeleteBlog}>
-                                <MdDeleteOutline />
+                                <MdDeleteOutline className='my-auto' />
                             </label>
                             <div className="popover-content">
                                 <div className="popover-arrow"></div>
@@ -78,7 +80,7 @@ const BlogCard = ({ id, title, desc, domain, img, author, content }) => {
                     </div>
                 </div>
             </div>
-            <EditModal id={id} title={title} desc={desc} img={img} content={content} />
+            <EditModal id={id} title={title} metaTags={metaTags} desc={desc} img={img} content={content} />
         </>
     )
 }

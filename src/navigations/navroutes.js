@@ -1,14 +1,9 @@
-import Home from '../pages';
 import AddBlogs from '../pages/dashboard/add-blogs';
 import EditBlogs from '../pages/dashboard/edit-blogs';
 import CreateAdmin from '../pages/dashboard/create-users'
 import Login from '../pages/auth/Login';
 
 export const UnAuthenticateRoutes = [
-    {
-        path: '/dashboard',
-        element: <Home />,
-    },
     {
         path: '/dashboard/add-blogs',
         element: <AddBlogs />,

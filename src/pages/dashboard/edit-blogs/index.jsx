@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import DashBoard from '../../../components/frames/dashboard';
-
-import BlogCard from '../../../components/cards/blog/BlogCard';
 import { useFirestore } from '../../../context/FirestoreContext'
+import Loader from '../../../components/loader'
+import DashBoard from '../../../components/frames/dashboard';
+import BlogCard from '../../../components/cards/blog/BlogCard';
 
 const EeditBlogs = () => {
 
     const [activeTab, setActiveTab] = useState('all');
     const [blogData, setBlogData] = useState();
+    const [loading, setLoading] = useState(false);
 
     const { getAllDocsAndFields } = useFirestore()
 
@@ -17,11 +18,14 @@ const EeditBlogs = () => {
 
     useEffect(() => {
         const fetchBlogsData = async () => {
+            setLoading(true)
             try {
                 const res = await getAllDocsAndFields('blogs')
                 setBlogData(res)
             } catch (error) {
                 console.error('Error while feteching blog data: ', error);
+            } finally {
+                setLoading(false)
             }
         }
 
@@ -49,23 +53,47 @@ const EeditBlogs = () => {
                         </label>
 
                         <input type="radio" id="tab-15" name="tab-5" className="tab-toggle" />
-                        <label htmlFor="tab-13" className="tab" onClick={() => handleTabChange('digital')}>
+                        <label htmlFor="tab-15" className="tab" onClick={() => handleTabChange('digital')}>
                             Digital Services
                         </label>
 
                         <input type="radio" id="tab-16" name="tab-5" className="tab-toggle" />
-                        <label htmlFor="tab-14" className="tab" onClick={() => handleTabChange('ca')}>
+                        <label htmlFor="tab-16" className="tab" onClick={() => handleTabChange('ca')}>
                             CA And Registration
                         </label>
                     </div>
                 </div>
                 <div className="tab-content">
                     {activeTab === 'all' && (
-                        blogData && blogData.reverse().map((data) => {
+                        blogData && [...blogData].reverse().map((data) => {
+                            return (
+
+                                loading ? (
+                                    <div className="my-auto mx-auto text-center">
+                                        <Loader />
+                                    </div>
+                                ) : (
+                                    <BlogCard
+                                        key={data.id}
+                                        id={data.id}
+                                        title={data.blogTitle}
+                                        metaTags={data.metaTags}
+                                        desc={data.blogDesc}
+                                        domain={data.domain}
+                                        img={data.titleImage}
+                                        author={data.writerName}
+                                        content={data.blogContent}
+                                    />
+                                )
+
+                            )
+                        })
+                    )}
+                    {activeTab === 'tech' && (
+                        techBlogs && [...techBlogs].reverse().map((data) => {
                             return (
                                 <BlogCard
                                     key={data.id}
-                                    id={data.id}
                                     title={data.blogTitle}
                                     desc={data.blogDesc}
                                     domain={data.domain}
@@ -76,53 +104,36 @@ const EeditBlogs = () => {
                             )
                         })
                     )}
-                    <div>
-                        {activeTab === 'tech' && (
-                            techBlogs?.map((data) => {
-                                return (
-                                    <BlogCard
-                                        key={data.id}
-                                        title={data.blogTitle}
-                                        desc={data.blogDesc}
-                                        domain={data.domain}
-                                        img={data.titleImage}
-                                        author={data.writerName}
-                                        content={data.blogContent}
-                                    />
-                                )
-                            })
-                        )}
-                        {activeTab === 'digital' && (
-                            digitalBlogs?.map((data) => {
-                                return (
-                                    <BlogCard
-                                        key={data.id}
-                                        title={data.blogTitle}
-                                        desc={data.blogDesc}
-                                        domain={data.domain}
-                                        img={data.titleImage}
-                                        author={data.writerName}
-                                        content={data.blogContent}
-                                    />
-                                )
-                            })
-                        )}
-                        {activeTab === 'ca' && (
-                            CABlogs?.map((data) => {
-                                return (
-                                    <BlogCard
-                                        key={data.id}
-                                        title={data.blogTitle}
-                                        desc={data.blogDesc}
-                                        domain={data.domain}
-                                        img={data.titleImage}
-                                        author={data.writerName}
-                                        content={data.blogContent}
-                                    />
-                                )
-                            })
-                        )}
-                    </div>
+                    {activeTab === 'digital' && (
+                        digitalBlogs && [...digitalBlogs].reverse().map((data) => {
+                            return (
+                                <BlogCard
+                                    key={data.id}
+                                    title={data.blogTitle}
+                                    desc={data.blogDesc}
+                                    domain={data.domain}
+                                    img={data.titleImage}
+                                    author={data.writerName}
+                                    content={data.blogContent}
+                                />
+                            )
+                        })
+                    )}
+                    {activeTab === 'ca' && (
+                        CABlogs && [...CABlogs].reverse().map((data) => {
+                            return (
+                                <BlogCard
+                                    key={data.id}
+                                    title={data.blogTitle}
+                                    desc={data.blogDesc}
+                                    domain={data.domain}
+                                    img={data.titleImage}
+                                    author={data.writerName}
+                                    content={data.blogContent}
+                                />
+                            )
+                        })
+                    )}
                 </div>
             </div>
         </DashBoard>

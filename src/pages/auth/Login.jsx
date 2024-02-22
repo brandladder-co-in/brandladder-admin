@@ -13,7 +13,7 @@ const Login = () => {
 
     useEffect(() => {
         if (currentUser?.uid) {
-            navigate('/dashboard');
+            navigate('/dashboard/blogs');
         }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps

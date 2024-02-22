@@ -77,11 +77,18 @@ export function FirestoreProvider({ children }) {
         }
     };
 
-    const updateDocumentData = async (collectionName, docId, updatedData) => {
+    const updateDocumentData = async (collectionName, docId, updatedBlogData) => {
         try {
             const docRef = doc(db, collectionName, docId);
-            await updateDoc(docRef, updatedData);
-            console.log("Document with ID: ", docId, " updated successfully!");
+            const docSnapshot = await getDoc(docRef);
+            if (docSnapshot.exists()) {
+                // Update the document with the provided data
+                const res = await updateDoc(docRef, updatedBlogData);
+                console.log(`Blog with ID ${docId} updated successfully!`);
+                return res;
+            } else {
+                console.error("No such blog document exists!");
+            }
         } catch (error) {
             console.error("Error updating document: ", error);
         }

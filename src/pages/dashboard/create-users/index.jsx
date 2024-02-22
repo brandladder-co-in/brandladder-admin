@@ -28,14 +28,14 @@ const CreateUsers = () => {
     return (
         <DashBoard>
             <div className="flex justify-center items-center h-full">
-                <form onSubmit={handleSubmit} className="shadow-xl bg-gray-2 rounded p-10">
+                <form onSubmit={handleSubmit} className="shadow-xl bg-gray-2 rounded p-12 w-3/4">
                     <h1 className="text-2xl mb-6">Create User</h1>
                     <div className="mb-4">
                         <label className="block text-sm text-white" htmlFor="email">
                             Email:
                         </label>
                         <input
-                            className="input-ghost-secondary input shadow appearance-none border rounded w-full py-2 px-3 text-secondary leading-tight focus:outline-none focus:shadow-outline"
+                            className="input-ghost-secondary input shadow appearance-none border rounded max-w-full py-2 px-3 text-secondary leading-tight focus:outline-none focus:shadow-outline"
                             id="email"
                             type="email"
                             placeholder="Enter your email"
@@ -49,7 +49,7 @@ const CreateUsers = () => {
                             Password:
                         </label>
                         <input
-                            className="input-ghost-secondary input shadow appearance-none border rounded w-full py-2 px-3 text-secondary mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                            className="input-ghost-secondary input shadow appearance-none border rounded maxz-w-full py-2 px-3 text-secondary mb-3 leading-tight focus:outline-none focus:shadow-outline"
                             id="password"
                             type="password"
                             placeholder="Enter your password"
@@ -60,7 +60,7 @@ const CreateUsers = () => {
                     </div>
                     <div className="flex items-center justify-center">
                         <button
-                            className="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            className="btn btn-outline-secondary w-full"
                             type="submit"
                         >
                             Create
