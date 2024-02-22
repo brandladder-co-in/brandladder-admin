@@ -78,11 +78,11 @@ const BlogDtls = () => {
             <div onSubclassName="bg-gray-2 shadow-xl rounded p-10">
                 <h1 className='text-center text-3xl my-5'>Blog Details</h1>
                 <div className="mb-4">
-                    <label className="block text-white text-sm font-bold mb-2" htmlFor="blogTitle">
+                    <label className="block text-sm font-bold mb-2" htmlFor="blogTitle">
                         Blog Title
                     </label>
                     <input
-                        className="input-ghost-secondary input shadow max-w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                        className="input-ghost-secondary input shadow max-w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
                         id="blogTitle"
                         type="text"
                         placeholder="Enter blog title"
@@ -93,11 +93,11 @@ const BlogDtls = () => {
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-white text-sm font-bold mb-2" htmlFor="metaTags">
+                    <label className="block text-sm font-bold mb-2" htmlFor="metaTags">
                         Meta Tags (Separated by comma)
                     </label>
                     <input
-                        className="input-ghost-secondary input shadow max-w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                        className="input-ghost-secondary input shadow max-w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
                         id="metaTags"
                         type="text"
                         placeholder="Enter meta tags"
@@ -106,11 +106,11 @@ const BlogDtls = () => {
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-white text-sm font-bold mb-2" htmlFor="blogDesc">
+                    <label className="block text-sm font-bold mb-2" htmlFor="blogDesc">
                         Blog Description
                     </label>
                     <textarea
-                        className="textarea-ghost-secondary textarea shadow max-w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                        className="textarea-ghost-secondary textarea shadow max-w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
                         id="blogDesc"
                         placeholder="Enter blog description"
                         name="blogDesc"
@@ -120,11 +120,11 @@ const BlogDtls = () => {
                     ></textarea>
                 </div>
                 <div className="mb-4 space-x-4">
-                    <label className="block my-auto text-white text-sm font-bold mb-2" htmlFor="titleImage">
+                    <label className="block my-auto  text-sm font-bold mb-2" htmlFor="titleImage">
                         Title Image
                     </label>
                     <input
-                        className="input-ghost-secondary input shadow max-w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                        className="input-ghost-secondary input shadow max-w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
                         id="titleImage"
                         type="text"
                         placeholder="Enter image name"
@@ -135,11 +135,11 @@ const BlogDtls = () => {
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-white text-sm font-bold mb-2" htmlFor="writerName">
+                    <label className="block text-sm font-bold mb-2" htmlFor="writerName">
                         Writer's Name
                     </label>
                     <input
-                        className="input-ghost-secondary input shadow max-w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                        className="input-ghost-secondary input shadow max-w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
                         id="writerName"
                         type="text"
                         placeholder="Enter writer's name"
@@ -150,11 +150,11 @@ const BlogDtls = () => {
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-white text-sm font-bold mb-2" htmlFor="domain">
+                    <label className="block text-sm font-bold mb-2" htmlFor="domain">
                         Domain
                     </label>
                     <select
-                        className="input-ghost-secondary bg-gray-2 input shadow max-w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                        className="input-ghost-secondary bg-gray-2 input shadow max-w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
                         id="domain"
                         name="domain"
                         value={dom}
@@ -199,9 +199,9 @@ const BlogDtls = () => {
                         />
                     )}
                     {activeTab === 'text' && (
-                        <>
-                            <h1>comming soon</h1>
-                        </>
+                        <div className="mt-4">
+                            <div dangerouslySetInnerHTML={{ __html: htmlcontent }} />
+                        </div>
                     )}
                 </div>
                 <button
