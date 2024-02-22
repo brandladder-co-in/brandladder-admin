@@ -25,26 +25,26 @@ const SidebarNavigation = ({ children }) => {
                             <span className="menu-title">Main menu</span>
                             <ul className="menu-items">
 
-                                <li className="menu-item">
-                                    <Link to='/dashboard/add-blogs' className='flex' >
+                                <Link to='/dashboard/add-blogs' className='flex' >
+                                    <li className="menu-item">
                                         <FaRegFileExcel className='my-auto mx-2' />
                                         <span>Add New Article</span>
-                                    </Link>
-                                </li>
+                                    </li>
+                                </Link>
 
-                                <li className="menu-item">
-                                    <Link to='/dashboard/blogs' className='flex' >
+                                <Link to='/dashboard/blogs' className='flex' >
+                                    <li className="menu-item">
                                         <GrArticle className='my-auto mx-2' />
                                         <span>All Blogs</span>
-                                    </Link>
-                                </li>
+                                    </li>
+                                </Link>
 
-                                <li className="menu-item">
-                                    <Link to='/dashboard/create-user' className='flex' >
+                                <Link to='/dashboard/create-user' className='flex' >
+                                    <li className="menu-item">
                                         <CiDatabase className='my-auto mx-2' />
                                         <span>Create New Admins</span>
-                                    </Link>
-                                </li>
+                                    </li>
+                                </Link>
 
                                 {/* <li className="menu-item">
                                     <Link to='/dashboard/question-bank' className='flex' >
