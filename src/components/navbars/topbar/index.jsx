@@ -27,17 +27,17 @@ const TopBar = ({ children }) => {
                         </button>
                         {/* <label className="btn btn-solid-primary my-2" tabIndex="0">Click</label> */}
                         <div className="dropdown-menu dropdown-menu-bottom-left">
-                            <Link to='/dashboard' className="dropdown-item text-sm flex flex-row menu-items">
+                            <Link to='/dashboard/add-blogs' className="dropdown-item text-sm flex flex-row menu-items">
                                 <CiHome className='my-auto mx-2' />
-                                <span>Dashboard</span>
+                                <span>Add Blogs</span>
                             </Link>
-                            <Link to='/dashboard' className="dropdown-item text-sm flex flex-row menu-items">
+                            <Link to='/dashboard/blogs' className="dropdown-item text-sm flex flex-row menu-items">
                                 <FaRegFileExcel className='my-auto mx-2' />
-                                <span>Add New Quiz</span>
+                                <span>All Blogs</span>
                             </Link>
-                            <Link to='/dashboard' className="dropdown-item text-sm flex flex-row menu-items">
+                            <Link to='/dashboard/create-user' className="dropdown-item text-sm flex flex-row menu-items">
                                 <CiHome className='my-auto mx-2' />
-                                <span>Dashboard</span>
+                                <span>Creeate User</span>
                             </Link>
                         </div>
                     </div>
