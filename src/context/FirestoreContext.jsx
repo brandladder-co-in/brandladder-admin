@@ -29,6 +29,18 @@ export function FirestoreProvider({ children }) {
         }
     };
 
+    const storeDocId = async (collectionName, docId) => {
+        try {
+            // Create a new document with the specified docId and empty data
+            await setDoc(doc(db, collectionName, docId), {});
+
+            console.log("Document ID stored successfully:", docId);
+        } catch (error) {
+            console.error("Error storing document ID: ", error);
+        }
+    };
+
+
     const getAllDocIds = async (collectionName) => {
         try {
             const querySnapshot = await getDocs(collection(db, collectionName));
@@ -105,6 +117,7 @@ export function FirestoreProvider({ children }) {
 
     const value = {
         storeData,
+        storeDocId,
         getAllDocIds,
         getDocumentData,
         getAllDocsAndFields,

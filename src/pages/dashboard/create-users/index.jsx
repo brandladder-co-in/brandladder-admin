@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import DashBoard from '../../../components/frames/dashboard';
 import useEmailAuth from '../../../hooks/auth/useEmailAuth';
+import { useFirestore } from '../../../context/FirestoreContext';
 import { showSuccessToast, showErrorToast } from '../../../components/tosters/natifications'
 
 const CreateUsers = () => {
@@ -8,16 +9,20 @@ const CreateUsers = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const { handleEmailSignIn } = useEmailAuth();
+    const { handleEmailSignUp } = useEmailAuth();
+    const { storeDocId: uploadAdmin } = useFirestore()
 
     // Function to handle form submission
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await handleEmailSignIn(email, password)
-            setEmail('')
-            setPassword('')
-            showSuccessToast('Admin Created')
+            if (email !== '' && password !== '') {
+                await handleEmailSignUp(email, password)
+                await uploadAdmin('admins', email)
+                setEmail('')
+                setPassword('')
+                showSuccessToast('Admin Created')
+            }
         } catch (error) {
             console.error('Error while submiting edited blogs: ', error)
             showErrorToast('Something went wrong !!')

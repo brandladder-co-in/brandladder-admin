@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 
+import { useFirestore } from '../../../context/FirestoreContext'
 import useEmailAuth from '../../../hooks/auth/useEmailAuth';
 import { showSuccessToast, showErrorToast } from '../../tosters/natifications';
 
@@ -14,39 +15,42 @@ const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState('');
-    const [userID, setuserID] = useState('')
     const [showPass, setShowPass] = useState(false);
+    const [adminList, setAdminList] = useState([]);
 
     const navigate = useNavigate();
-    const { handleEmailSignUp, currentUser } = useEmailAuth();
+    const { getAllDocIds: fetchALLAdmins } = useFirestore();
+    const { handleEmailSignUp } = useEmailAuth();
 
     const handleEmailLogin = async () => {
-
         try {
-            setLoading(true)
+            setLoading(true);
 
             if (email !== '' && password !== '') {
-                const res = await handleEmailSignUp(email, password);
-
-                setuserID(res.user.uid)
-                console.log('res: ', res?.user?.uid)
-                console.log('currentUser: ', currentUser)
-
-                if (userID !== '') {
-                    navigate('/dashbaord')
+                // Linear search to check if email is in adminList
+                let found = false;
+                for (const adminEmail of adminList) {
+                    if (adminEmail === email) {
+                        found = true;
+                        break;
+                    }
                 }
 
-                showSuccessToast(`Login Succesfully`)
+                if (found) {
+                    await handleEmailSignUp(email, password);
+                    navigate('/dashboard/blogs');
+                    showSuccessToast(`Login Successfully`);
+                } else {
+                    showErrorToast(`Email not authorized`);
+                }
             } else {
-                showErrorToast('All Firelds are required !!')
+                showErrorToast('All Fields are required !!');
             }
-
         } catch (error) {
             console.error("Email sign-in error:", error);
-            setLoading(false)
-            showErrorToast("Email and password not matching")
+            showErrorToast("Email and password not matching");
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
     };
 
@@ -57,6 +61,22 @@ const LoginForm = () => {
             console.error('Error while show password: ', error);
         }
     }
+
+    useEffect(() => {
+
+        const handleAllAdmins = async () => {
+            try {
+                const res = await fetchALLAdmins('admins');
+                setAdminList(res)
+            } catch (error) {
+                console.error('Error while fetching all admins: ', error);
+            }
+        }
+
+        handleAllAdmins();
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <aside className="flex flex-col items-center">
