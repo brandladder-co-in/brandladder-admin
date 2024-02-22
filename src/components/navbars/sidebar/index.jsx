@@ -45,7 +45,7 @@ const SidebarNavigation = ({ children }) => {
                                 </li>
 
                                 <li className="menu-item">
-                                    <Link to='/dashboard/create-admin' className='flex' >
+                                    <Link to='/dashboard/create-user' className='flex' >
                                         <CiDatabase className='my-auto mx-2' />
                                         <span>Create New Admins</span>
                                     </Link>

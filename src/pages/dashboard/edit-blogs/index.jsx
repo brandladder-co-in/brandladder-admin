@@ -29,9 +29,9 @@ const EeditBlogs = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    // const techBlogs = blogData?.filter(data => data.domain === 'tech_services');
-    // const digitalBlogs = blogData?.filter(data => data.domain === 'digital_services');
-    // const CABlogs = blogData?.filter(data => data.domain === 'ca_services');
+    const techBlogs = blogData?.filter(data => data.domain === 'tech_services');
+    const digitalBlogs = blogData?.filter(data => data.domain === 'digital_services');
+    const CABlogs = blogData?.filter(data => data.domain === 'ca_services');
 
     return (
         <DashBoard>
@@ -61,7 +61,7 @@ const EeditBlogs = () => {
                 </div>
                 <div className="tab-content">
                     {activeTab === 'all' && (
-                        blogData?.map((data) => {
+                        blogData && blogData.reverse().map((data) => {
                             return (
                                 <BlogCard
                                     key={data.id}
@@ -76,53 +76,53 @@ const EeditBlogs = () => {
                             )
                         })
                     )}
-                    {/* <div>
-                    {activeTab === 'tech' && (
-                        techBlogs?.map((data) => {
-                            return (
-                                <BlogCard
-                                    key={data.id}
-                                    title={data.blogTitle}
-                                    desc={data.blogDesc}
-                                    domain={data.domain}
-                                    img={data.titleImage}
-                                    author={data.writerName}
-                                    content={data.blogContent}
-                                />
-                            )
-                        })
-                    )}
-                    {activeTab === 'digital' && (
-                        digitalBlogs?.map((data) => {
-                            return (
-                                <BlogCard
-                                    key={data.id}
-                                    title={data.blogTitle}
-                                    desc={data.blogDesc}
-                                    domain={data.domain}
-                                    img={data.titleImage}
-                                    author={data.writerName}
-                                    content={data.blogContent}
-                                />
-                            )
-                        })
-                    )}
-                    {activeTab === 'ca' && (
-                        CABlogs?.map((data) => {
-                            return (
-                                <BlogCard
-                                    key={data.id}
-                                    title={data.blogTitle}
-                                    desc={data.blogDesc}
-                                    domain={data.domain}
-                                    img={data.titleImage}
-                                    author={data.writerName}
-                                    content={data.blogContent}
-                                />
-                            )
-                        })
-                    )}
-                    </div> */}
+                    <div>
+                        {activeTab === 'tech' && (
+                            techBlogs?.map((data) => {
+                                return (
+                                    <BlogCard
+                                        key={data.id}
+                                        title={data.blogTitle}
+                                        desc={data.blogDesc}
+                                        domain={data.domain}
+                                        img={data.titleImage}
+                                        author={data.writerName}
+                                        content={data.blogContent}
+                                    />
+                                )
+                            })
+                        )}
+                        {activeTab === 'digital' && (
+                            digitalBlogs?.map((data) => {
+                                return (
+                                    <BlogCard
+                                        key={data.id}
+                                        title={data.blogTitle}
+                                        desc={data.blogDesc}
+                                        domain={data.domain}
+                                        img={data.titleImage}
+                                        author={data.writerName}
+                                        content={data.blogContent}
+                                    />
+                                )
+                            })
+                        )}
+                        {activeTab === 'ca' && (
+                            CABlogs?.map((data) => {
+                                return (
+                                    <BlogCard
+                                        key={data.id}
+                                        title={data.blogTitle}
+                                        desc={data.blogDesc}
+                                        domain={data.domain}
+                                        img={data.titleImage}
+                                        author={data.writerName}
+                                        content={data.blogContent}
+                                    />
+                                )
+                            })
+                        )}
+                    </div>
                 </div>
             </div>
         </DashBoard>

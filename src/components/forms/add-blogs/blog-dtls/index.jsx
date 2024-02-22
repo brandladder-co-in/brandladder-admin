@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+// import { useNavigation } from 'react-router-dom';
 import JoditEditor from 'jodit-react';
 import { useFirestore } from '../../../../context/FirestoreContext';
 import { showSuccessToast, showErrorToast } from '../../../tosters/natifications'
@@ -7,6 +8,7 @@ const BlogDtls = () => {
 
     const [activeTab, setActiveTab] = useState('editor');
     const [title, setTitle] = useState('');
+    const [metaTags, setMetaTags] = useState([]);
     const [desc, setDesc] = useState('');
     const [img, setImg] = useState('');
     const [author, setAuthor] = useState('');
@@ -15,8 +17,11 @@ const BlogDtls = () => {
 
     const { storeData: uploadBlog } = useFirestore()
     const editor = useRef(null);
+    // const navigate = useNavigation();
+
     const blogData = {
         blogTitle: title,
+        metaTags: metaTags.map(tag => tag.trim()),
         blogDesc: desc,
         titleImage: img,
         writerName: author,
@@ -25,11 +30,26 @@ const BlogDtls = () => {
         blogContent: htmlcontent,
     };
 
+    const handleMetaTagsChange = (e) => {
+        const tags = e.target.value.split(',');
+        setMetaTags(tags);
+    };
+
     const handleKeyDown = (event, editor) => {
         // const selection = editor.selection;
         // const selectedElement = selection.current();
         // console.log(selectedElement);
     };
+
+    const handleInputAfterSubmit = () => {
+        setTitle('')
+        setMetaTags('')
+        setDesc('')
+        setImg('')
+        setAuthor('')
+        setDom('')
+        setHtmlContent()
+    }
 
     const handleTabChange = (tab) => {
         setActiveTab(tab);
@@ -42,7 +62,9 @@ const BlogDtls = () => {
 
             if (title !== '' && desc !== '' && img !== '' && author !== '' && dom !== '' && htmlcontent !== '') {
                 await uploadBlog('blogs', currentDate, blogData)
+                // console.log(blogData)
                 showSuccessToast('Blog Uploadeed Successfully !!')
+                handleInputAfterSubmit()
             }
 
         } catch (error) {
@@ -53,7 +75,7 @@ const BlogDtls = () => {
 
     return (
         <div className="max-w-5xl mx-auto">
-            <form onSubclassName="bg-gray-2 shadow-xl rounded p-10">
+            <div onSubclassName="bg-gray-2 shadow-xl rounded p-10">
                 <h1 className='text-center text-3xl my-5'>Blog Details</h1>
                 <div className="mb-4">
                     <label className="block text-white text-sm font-bold mb-2" htmlFor="blogTitle">
@@ -68,6 +90,19 @@ const BlogDtls = () => {
                         value={title}
                         onChange={(e) => { setTitle(e.target.value) }}
                         required
+                    />
+                </div>
+                <div className="mb-4">
+                    <label className="block text-white text-sm font-bold mb-2" htmlFor="metaTags">
+                        Meta Tags (Separated by comma)
+                    </label>
+                    <input
+                        className="input-ghost-secondary input shadow max-w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                        id="metaTags"
+                        type="text"
+                        placeholder="Enter meta tags"
+                        value={metaTags.join(',')} // Join the array of tags with comma to display in the input field
+                        onChange={handleMetaTagsChange}
                     />
                 </div>
                 <div className="mb-4">
@@ -132,7 +167,7 @@ const BlogDtls = () => {
                         <option value="ca_services">CA and Registration Service</option>
                     </select>
                 </div>
-            </form>
+            </div>
             <div className="max-w-5xl bg-gray-2 mx-auto px-10 py-4">
                 <div className="tabs mx-auto mb-6">
                     <div className="tabs tabs-boxed space-x-2">
@@ -147,10 +182,10 @@ const BlogDtls = () => {
                         </label>
                     </div>
                 </div>
-                <div className="tab-content">
+                <div className="tab-content max-w-full ">
                     {activeTab === 'editor' && (
                         <JoditEditor
-                            className='text-black'
+                            className='text-black w-1'
                             ref={editor}
                             value={htmlcontent}
                             tabIndex={1}
