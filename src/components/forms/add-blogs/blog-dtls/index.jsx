@@ -154,7 +154,7 @@ const BlogDtls = () => {
                         Domain
                     </label>
                     <select
-                        className="input-ghost-secondary input shadow max-w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                        className="input-ghost-secondary bg-gray-2 input shadow max-w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
                         id="domain"
                         name="domain"
                         value={dom}
