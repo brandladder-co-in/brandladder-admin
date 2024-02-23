@@ -69,9 +69,7 @@ const EeditBlogs = () => {
                             return (
 
                                 loading ? (
-                                    <div className="my-auto mx-auto text-center">
-                                        <Loader />
-                                    </div>
+                                    <div className="skeleton-pulse h-24"></div>
                                 ) : (
                                     <BlogCard
                                         key={data.id}
@@ -90,19 +88,24 @@ const EeditBlogs = () => {
                         })
                     )}
                     {activeTab === 'tech' && (
-                        techBlogs && [...techBlogs].reverse().map((data) => {
-                            return (
-                                <BlogCard
-                                    key={data.id}
-                                    title={data.blogTitle}
-                                    desc={data.blogDesc}
-                                    domain={data.domain}
-                                    img={data.titleImage}
-                                    author={data.writerName}
-                                    content={data.blogContent}
-                                />
-                            )
-                        })
+
+                        loading ? (
+                            <div className="skeleton-pulse h-24"></div>
+                        ) : (
+                            techBlogs && [...techBlogs].reverse().map((data) => {
+                                return (
+                                    <BlogCard
+                                        key={data.id}
+                                        title={data.blogTitle}
+                                        desc={data.blogDesc}
+                                        domain={data.domain}
+                                        img={data.titleImage}
+                                        author={data.writerName}
+                                        content={data.blogContent}
+                                    />
+                                )
+                            })
+                        )
                     )}
                     {activeTab === 'digital' && (
                         digitalBlogs && [...digitalBlogs].reverse().map((data) => {

@@ -73,6 +73,7 @@ const BlogDtls = () => {
         }
     }
 
+
     return (
         <div className="max-w-5xl mx-auto">
             <div onSubclassName="bg-gray-2 shadow-xl rounded p-10">
@@ -164,12 +165,16 @@ const BlogDtls = () => {
                         <option value="Default">Default</option>
                         <option value="tech_services">Technology</option>
                         <option value="digital_services">Digitial Services</option>
+                        <option value="startup">Startup</option>
+                        <option value="innovation">Innovation</option>
+                        <option value="investment">investment</option>
                         <option value="ca_services">CA and Registration Service</option>
+                        {/* investment inovation */}
                     </select>
                 </div>
             </div>
             <div className="max-w-5xl bg-gray-2 mx-auto px-10 py-4">
-                <div className="tabs mx-auto mb-6">
+                {/* <div className="tabs mx-auto mb-6">
                     <div className="tabs tabs-boxed space-x-2">
                         <input type="radio" id="tab-13" name="tab-5" className="tab-toggle" defaultChecked />
                         <label htmlFor="tab-13" className="tab" onClick={() => handleTabChange('editor')}>
@@ -181,28 +186,28 @@ const BlogDtls = () => {
                             Upload Document
                         </label>
                     </div>
-                </div>
+                </div> */}
                 <div className="tab-content max-w-full ">
-                    {activeTab === 'editor' && (
-                        <JoditEditor
-                            className='text-black w-1'
-                            ref={editor}
-                            value={htmlcontent}
-                            tabIndex={1}
-                            onBlur={(newContent) => setHtmlContent(newContent)}
-                            onChange={(newContent) => setHtmlContent(newContent)}
-                            onInit={(editor) => {
-                                editor.events.on('keydown', (event) => {
-                                    handleKeyDown(event, editor);
-                                });
-                            }}
-                        />
-                    )}
-                    {activeTab === 'text' && (
+                    {/* {activeTab === 'editor' && ( */}
+                    <JoditEditor
+                        className='text-black w-1'
+                        ref={editor}
+                        value={htmlcontent}
+                        tabIndex={1}
+                        onBlur={(newContent) => setHtmlContent(newContent)}
+                        onChange={(newContent) => setHtmlContent(newContent)}
+                        onInit={(editor) => {
+                            editor.events.on('keydown', (event) => {
+                                handleKeyDown(event, editor);
+                            });
+                        }}
+                    />
+                    {/* )} */}
+                    {/* {activeTab === 'text' && (
                         <div className="mt-4">
                             <div dangerouslySetInnerHTML={{ __html: htmlcontent }} />
                         </div>
-                    )}
+                    )} */}
                 </div>
                 <button
                     className='btn btn-outline-secondary w-full mx-auto text-center mt-10'

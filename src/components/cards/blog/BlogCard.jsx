@@ -6,8 +6,9 @@ import EditModal from '../../../components/modal/editblog-modal/';
 
 import { FaEdit, FaEye } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
+import ViewBlogModal from '../../modal/view-modal';
 
-const BlogCard = ({ id, title, desc, domain, img, metaTags, content }) => {
+const BlogCard = ({ id, title, desc, domain, img, metaTags, content, author }) => {
 
     const { deleteDocument: deleteBlog } = useFirestore();
 
@@ -58,12 +59,15 @@ const BlogCard = ({ id, title, desc, domain, img, metaTags, content }) => {
                             </div>
                         </div>
                         <div className="popover popover-hover">
-                            <label className="popover-trigger btn-sm btn-outline-secondary menu-item-disabled">
+                            <label
+                                className="popover-trigger btn-sm btn-outline-secondary"
+                                htmlFor={`view${id}`}
+                            >
                                 <FaEye className='my-auto' />
                             </label>
                             <div className="popover-content">
                                 <div className="popover-arrow"></div>
-                                <div className="p-4 text-sm">See {title} (disabled for now)</div>
+                                <div className="p-4 text-sm">Preview of {title}</div>
                             </div>
                         </div>
                         <div className="popover popover-hover">
@@ -81,6 +85,16 @@ const BlogCard = ({ id, title, desc, domain, img, metaTags, content }) => {
                 </div>
             </div>
             <EditModal id={id} title={title} metaTags={metaTags} desc={desc} img={img} content={content} />
+            <ViewBlogModal
+                id={id}
+                title={title}
+                desc={desc}
+                domain={domain}
+                img={img}
+                metaTags={metaTags}
+                content={content}
+                author={author}
+            />
         </>
     )
 }
