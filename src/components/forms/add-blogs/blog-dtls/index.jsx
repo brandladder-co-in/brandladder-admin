@@ -72,7 +72,7 @@ const BlogDtls = () => {
     }
 
     const handleSubmit = async () => {
-
+        handleDomainSet()
         try {
             const currentDate = new Date().toISOString()
 
