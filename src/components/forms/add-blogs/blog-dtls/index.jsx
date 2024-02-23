@@ -6,7 +6,7 @@ import { showSuccessToast, showErrorToast } from '../../../tosters/natifications
 
 const BlogDtls = () => {
 
-    const [activeTab, setActiveTab] = useState('editor');
+    // const [activeTab, setActiveTab] = useState('editor');
     const [title, setTitle] = useState('');
     const [metaTags, setMetaTags] = useState([]);
     const [desc, setDesc] = useState('');
@@ -51,9 +51,9 @@ const BlogDtls = () => {
         setHtmlContent()
     }
 
-    const handleTabChange = (tab) => {
-        setActiveTab(tab);
-    };
+    // const handleTabChange = (tab) => {
+    //     setActiveTab(tab);
+    // };
 
     const handleSubmit = async () => {
 

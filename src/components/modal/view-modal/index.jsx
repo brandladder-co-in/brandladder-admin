@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useFirestore } from '../../../context/FirestoreContext';
+// import { useFirestore } from '../../../context/FirestoreContext';
 
 const ViewBlogModal = ({ id, title, desc, domain, img, metaTags, content, author }) => {
 
     const [readingTime, setReadingTime] = useState(0);
-    const { getDocumentData: fetchBlogData } = useFirestore()
+    // const { getDocumentData: fetchBlogData } = useFirestore()
 
     const calculateReadingTime = (htmlContent) => {
         const plainText = htmlContent.replace(/<[^>]+>/g, '');
@@ -28,16 +28,17 @@ const ViewBlogModal = ({ id, title, desc, domain, img, metaTags, content, author
         return new Date(dateString).toLocaleDateString('en-US', options);
     };
 
-    const handleCloseModal = () => {
-        try {
-            document.getElementById('editblog-modal').checked = false
-        } catch (error) {
-            console.error('Error whiel closing modal: ', error)
-        }
-    }
+    // const handleCloseModal = () => {
+    //     try {
+    //         document.getElementById('editblog-modal').checked = false
+    //     } catch (error) {
+    //         console.error('Error whiel closing modal: ', error)
+    //     }
+    // }
 
     useEffect(() => {
         calculateReadingTime(content)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

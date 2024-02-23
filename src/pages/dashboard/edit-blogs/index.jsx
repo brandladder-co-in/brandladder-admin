@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useFirestore } from '../../../context/FirestoreContext'
-import Loader from '../../../components/loader'
+// import Loader from '../../../components/loader'
 import DashBoard from '../../../components/frames/dashboard';
 import BlogCard from '../../../components/cards/blog/BlogCard';
 
