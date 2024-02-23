@@ -55,6 +55,22 @@ const BlogDtls = () => {
     //     setActiveTab(tab);
     // };
 
+    const handleDomainSet = () => {
+        if (dom === 'tech_services') {
+            setDom('Technology');
+        } if (dom === 'digital_services') {
+            setDom('Digital');
+        } if (dom === 'ca_services') {
+            setDom('CA And Registration');
+        } if (dom === 'startup') {
+            setDom('Startup And Innovation');
+        } if (dom === 'innovation') {
+            setDom('Innovation');
+        } if (dom === 'investment') {
+            setDom('Investment');
+        }
+    }
+
     const handleSubmit = async () => {
 
         try {
