@@ -65,7 +65,7 @@ const AddEvent = () => {
 
                 uploadEventData('events', eventTitle, eventData)
                 // console.log(res)
-                navigate('/dashboard/all-events')
+                navigate('/dashboard/blogs')
             }
 
         } catch (error) {
