@@ -1,23 +1,9 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-import useEmailAuth from '../../hooks/auth/useEmailAuth'
+import React from 'react';
 
 import AuthPageFrames from '../../components/frames/auth'
 import LoginForm from '../../components/forms/login'
 
 const Login = () => {
-
-    const navigate = useNavigate()
-    const { currentUser } = useEmailAuth();
-
-    useEffect(() => {
-        if (currentUser?.uid) {
-            navigate('/dashboard/blogs');
-        }
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [currentUser?.uid])
 
     return (
         <AuthPageFrames>

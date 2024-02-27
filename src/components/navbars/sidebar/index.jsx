@@ -6,8 +6,9 @@ import LogoutModal from '../../modal/logout-modal';
 import Alert from '../../tosters/alert';
 
 import { GrArticle } from "react-icons/gr";
-import { CiDatabase } from "react-icons/ci";
 import { FaRegFileExcel } from "react-icons/fa";
+import { MdOutlineEmojiEvents } from "react-icons/md";
+import { RxAvatar } from "react-icons/rx";
 
 const SidebarNavigation = ({ children }) => {
 
@@ -39,9 +40,23 @@ const SidebarNavigation = ({ children }) => {
                                     </li>
                                 </Link>
 
+                                <Link to='/dashboard/add-event' className='flex' >
+                                    <li className="menu-item">
+                                        <MdOutlineEmojiEvents className='my-auto mx-2' />
+                                        <span>Add New Event</span>
+                                    </li>
+                                </Link>
+
+                                {/* <Link to='/dashboard/all-events' className='flex' >
+                                    <li className="menu-item">
+                                        <MdOutlineEventSeat className='my-auto mx-2' />
+                                        <span>All Events</span>
+                                    </li>
+                                </Link> */}
+
                                 <Link to='/dashboard/create-user' className='flex' >
                                     <li className="menu-item">
-                                        <CiDatabase className='my-auto mx-2' />
+                                        <RxAvatar className='my-auto mx-2' />
                                         <span>Create New Admins</span>
                                     </li>
                                 </Link>

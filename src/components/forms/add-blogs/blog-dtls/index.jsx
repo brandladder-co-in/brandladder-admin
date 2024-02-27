@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
-// import { useNavigation } from 'react-router-dom';
 import JoditEditor from 'jodit-react';
+import useEmailAuth from '../../../../hooks/auth/useEmailAuth';
 import { useFirestore } from '../../../../context/FirestoreContext';
 import { showSuccessToast, showErrorToast } from '../../../tosters/natifications'
 
@@ -16,15 +16,16 @@ const BlogDtls = () => {
     const [htmlcontent, setHtmlContent] = useState('');
 
     const { storeData: uploadBlog } = useFirestore()
+    const { currentUser } = useEmailAuth();
     const editor = useRef(null);
-    // const navigate = useNavigation();
 
     const blogData = {
         blogTitle: title,
-        metaTags: metaTags.map(tag => tag.trim()),
+        metaTags: metaTags?.map(tag => tag.trim()),
         blogDesc: desc,
         titleImage: img,
         writerName: author,
+        writerEmail: currentUser.email,
         domain: dom,
         date: new Date().toISOString(),
         blogContent: htmlcontent,
@@ -55,29 +56,12 @@ const BlogDtls = () => {
     //     setActiveTab(tab);
     // };
 
-    const handleDomainSet = () => {
-        if (dom === 'tech_services') {
-            setDom('Technology');
-        } if (dom === 'digital_services') {
-            setDom('Digital');
-        } if (dom === 'ca_services') {
-            setDom('CA And Registration');
-        } if (dom === 'startup') {
-            setDom('Startup And Innovation');
-        } if (dom === 'innovation') {
-            setDom('Innovation');
-        } if (dom === 'investment') {
-            setDom('Investment');
-        }
-    }
-
     const handleSubmit = async () => {
-        handleDomainSet()
         try {
-            const currentDate = new Date().toISOString()
+            // const currentDate = new Date().toISOString()
 
             if (title !== '' && desc !== '' && img !== '' && author !== '' && dom !== '' && htmlcontent !== '') {
-                await uploadBlog('blogs', currentDate, blogData)
+                await uploadBlog('blogs', title, blogData)
                 // console.log(blogData)
                 showSuccessToast('Blog Uploadeed Successfully !!')
                 handleInputAfterSubmit()
@@ -92,7 +76,7 @@ const BlogDtls = () => {
 
     return (
         <div className="max-w-5xl mx-auto">
-            <div onSubclassName="bg-gray-2 shadow-xl rounded p-10">
+            <div className="bg-gray-2 shadow-xl rounded p-10">
                 <h1 className='text-center text-3xl my-5'>Blog Details</h1>
                 <div className="mb-4">
                     <label className="block text-sm font-bold mb-2" htmlFor="blogTitle">
@@ -178,13 +162,13 @@ const BlogDtls = () => {
                         onChange={(e) => { setDom(e.target.value) }}
                         required
                     >
-                        <option value="Default">Default</option>
-                        <option value="tech_services">Technology</option>
-                        <option value="digital_services">Digitial Services</option>
-                        <option value="startup">Startup</option>
-                        <option value="innovation">Innovation</option>
-                        <option value="investment">investment</option>
-                        <option value="ca_services">CA and Registration Service</option>
+                        <option value="Random">Default</option>
+                        <option value="Technology">Technology</option>
+                        <option value="Digitial">Digitial Services</option>
+                        <option value="Startup">Startup</option>
+                        <option value="Innovation">Innovation</option>
+                        <option value="Investment">Investment</option>
+                        <option value="CA and Registration">CA and Registration Service</option>
                         {/* investment inovation */}
                     </select>
                 </div>
