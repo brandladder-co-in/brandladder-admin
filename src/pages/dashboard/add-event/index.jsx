@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import JoditEditor from 'jodit-react';
+
 import { useFirestore } from '../../../context/FirestoreContext';
 import DashBoard from '../../../components/frames/dashboard';
 
@@ -7,19 +9,25 @@ const AddEvent = () => {
 
     const [eventTitle, setEventTitle] = useState('');
     const [img, setImg] = useState('');
-    const [orgImg, setOrgImg] = useState('');
-    const [orgName, setOrgName] = useState('');
-    const [eventType, setEventType] = useState('Online');
     const [desc, setDesc] = useState('');
     const [bannerImg, setBannerImg] = useState('');
-    const [regFees, setRegFees] = useState('Free');
     const [eligibility, setEligibility] = useState('');
+    const [brief, setBrief] = useState()
+    const [problemStatement, setProblemStatement] = useState()
     const [hashtags, setHashtags] = useState([]);
     const [teamSize, setTeamSize] = useState([{
         min: 1,
         max: 1,
         note: '',
     }]);
+    // const [orgDtls, setOrgDtls] = useState([
+    //     {
+    //         name: 'Brandladder',
+    //         logo: 'https://firebasestorage.googleapis.com/v0/b/brandladder-webapp.appspot.com/o/general%2FScreenshot%202024-02-28%20002631.png?alt=media&token=3f934703-2f7d-47e9-9f9e-dd988b3c8be7',
+    //         webLink: 'https://brandladder.co.in/',
+    //     }
+    // ])
+
     const [timeline, setTimeline] = useState([
         {
             reg_start: '',
@@ -30,41 +38,49 @@ const AddEvent = () => {
             note: ''
         }
     ]);
-    // const [prizes, setPrizes] = useState([
-    //     {
-    //         first: '',
-    //         second: '',
-    //         third: '',
-    //         forth: '',
-    //         fifth: '',
-    //         other: '',
-    //         note: ''
-    //     }
-    // ]);
+
+    const orgDtls = [
+        {
+            name: 'Brandladder',
+            logo: 'https://firebasestorage.googleapis.com/v0/b/brandladder-webapp.appspot.com/o/general%2FScreenshot%202024-02-28%20002631.png?alt=media&token=3f934703-2f7d-47e9-9f9e-dd988b3c8be7',
+            webLink: 'https://brandladder.co.in/',
+        }
+    ]
+
+    const handleKeyDown = (event, editor) => {
+        // const selection = editor.selection;
+        // const selectedElement = selection.current();
+        // console.log(selectedElement);
+    };
 
     const { storeData: uploadEventData } = useFirestore()
     const navigate = useNavigate()
+    const brifEditor = useRef(null);
 
     const handleSubmit = () => {
 
         try {
 
-            if (eventTitle !== '' && img !== '' && bannerImg !== '' && desc !== '' && eventType !== '' && orgImg !== '' && orgName !== '') {
+            const fieldValueCheck = eventTitle !== '' && img !== '' && bannerImg !== '' && desc !== ''
+
+            if (fieldValueCheck) {
                 const eventData = {
                     eventTitle: eventTitle,
                     eventImage: img,
                     bannerImg: bannerImg,
                     eventDesc: desc,
                     hashtags: hashtags,
-                    eventType: eventType,
+                    eventType: 'Online',
                     eventTimeline: timeline,
                     teamSize: teamSize,
-                    orgImgUrl: orgImg,
-                    orgName: orgName,
+                    orgDtls: orgDtls,
+                    eligibility: eligibility,
+                    eventBrief: brief,
+                    problemStatement: problemStatement,
                 }
 
                 uploadEventData('events', eventTitle, eventData)
-                // console.log(res)
+                // console.log(eventData)
                 navigate('/dashboard/blogs')
             }
 
@@ -78,43 +94,23 @@ const AddEvent = () => {
             <h1 className='text-center text-4xl'>Add Event Details</h1>
             <div className='w-4/5 mx-auto py-16 space-y-12'>
 
-                <section className='space-y-5'>
-                    <h2 className='text-2xl'>Organization Description</h2>
-                    <div className='grid grid-cols-5 gap-4' >
-                        <input
-                            className="input-ghost-secondary input max-w-full col-span-2"
-                            placeholder="Organization Logo URL"
-                            value={orgImg}
-                            onChange={(e) => setOrgImg(e.target.value)}
-                        />
-                        <input
-                            className="input-ghost-secondary input max-w-full col-span-3"
-                            placeholder="Organization Name"
-                            value={orgName}
-                            onChange={(e) => setOrgName(e.target.value)}
-                        />
-                    </div>
-                </section>
-
                 <section className='space-y-5' >
                     <h2 className='text-2xl'>Event Details</h2>
                     <div className='space-y-5'>
-                        <div className="grid grid-cols-3 gap-4">
-                            <input
-                                className="input-ghost-secondary input max-w-full col-span-2"
-                                placeholder="Event Title"
-                                value={eventTitle}
-                                onChange={(e) => setEventTitle(e.target.value)}
-                            />
-                            <select
-                                className="input-ghost-secondary input transition-all duration-300 ease-in-out transform hover:scale-105"
+                        <input
+                            className="input-ghost-secondary input max-w-full"
+                            placeholder="Event Title"
+                            value={eventTitle}
+                            onChange={(e) => setEventTitle(e.target.value)}
+                        />
+                        {/* <select
+                                className="input-ghost-secondary input "
                                 value={eventType}
                                 onChange={(e) => { setEventType(e.target.value) }}
                             >
                                 <option value="Online">Online</option>
                                 <option value="Offline">Offline</option>
-                            </select>
-                        </div>
+                            </select> */}
 
                         <div className="grid grid-cols-2 gap-4">
                             <div className='space-y-2'>
@@ -145,18 +141,44 @@ const AddEvent = () => {
                             />
                             <input
                                 className="input-ghost-secondary input max-w-full"
-                                placeholder="Eligibility"
-                                value={regFees}
-                                onChange={(e) => setRegFees(e.target.value)}
-                            />
-                            <input
-                                className="input-ghost-secondary input max-w-full"
                                 placeholder="Hashtags (comma separated)"
                                 value={hashtags.join(',')}
                                 onChange={(e) => setHashtags(e.target.value.split(','))}
                             />
                         </div>
                     </div>
+                    <section className='space-y-4'>
+                        <h2 className='text-2xl' >Event Brief</h2>
+                        <JoditEditor
+                            className='text-black w-1'
+                            ref={brifEditor}
+                            value={brief}
+                            tabIndex={1}
+                            onBlur={(newContent) => setBrief(newContent)}
+                            onChange={(newContent) => setBrief(newContent)}
+                            onInit={(editor) => {
+                                editor.events.on('keydown', (event) => {
+                                    handleKeyDown(event, editor);
+                                });
+                            }}
+                        />
+                    </section>
+                    <section className='space-y-4'>
+                        <h2 className='text-2xl' >Problem Statement</h2>
+                        <JoditEditor
+                            className='text-black w-1'
+                            ref={brifEditor}
+                            value={problemStatement}
+                            tabIndex={1}
+                            onBlur={(newContent) => setProblemStatement(newContent)}
+                            onChange={(newContent) => setProblemStatement(newContent)}
+                            onInit={(editor) => {
+                                editor.events.on('keydown', (event) => {
+                                    handleKeyDown(event, editor);
+                                });
+                            }}
+                        />
+                    </section>
                     <section className='space-y-5'>
                         <h2 className='text-2xl'>Event Timelines</h2>
                         <div className='space-y-2'>
