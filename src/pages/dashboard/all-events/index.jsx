@@ -5,7 +5,7 @@ import EventCard from '../../../components/cards/event'
 
 const AllEvent = () => {
 
-    const [eventData, setEventData] = useState(true)
+    const [eventData, setEventData] = useState()
     const [loading, setLoading] = useState()
 
     const { getAllDocsAndFields: fetchEventsData } = useFirestore()
@@ -28,6 +28,8 @@ const AllEvent = () => {
         handleFetchBlogData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
+
+    // console.log(eventData)
 
     return (
         <DashBoard>

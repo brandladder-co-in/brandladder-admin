@@ -7,7 +7,7 @@ import Alert from '../../tosters/alert';
 
 import { GrArticle } from "react-icons/gr";
 import { FaRegFileExcel } from "react-icons/fa";
-import { MdOutlineEmojiEvents } from "react-icons/md";
+import { MdOutlineEmojiEvents, MdOutlineEventSeat } from "react-icons/md";
 import { RxAvatar } from "react-icons/rx";
 
 const SidebarNavigation = ({ children }) => {
@@ -47,12 +47,12 @@ const SidebarNavigation = ({ children }) => {
                                     </li>
                                 </Link>
 
-                                {/* <Link to='/dashboard/all-events' className='flex' >
+                                <Link to='/dashboard/all-events' className='flex' >
                                     <li className="menu-item">
                                         <MdOutlineEventSeat className='my-auto mx-2' />
                                         <span>All Events</span>
                                     </li>
-                                </Link> */}
+                                </Link>
 
                                 <Link to='/dashboard/create-user' className='flex' >
                                     <li className="menu-item">

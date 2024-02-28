@@ -5,7 +5,6 @@ import { showSuccessToast, showErrorToast } from '../../../components/tosters/na
 
 import { FaEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
-import EventEditModal from '../../modal/events/edit-modal';
 
 const BlogCard = ({ id, eventTitle, eventDesc, eventType, bannerImg, eventImage, eventTimeline, hashtags, orgImgUrl, orgName, teamSize }) => {
 
@@ -29,7 +28,7 @@ const BlogCard = ({ id, eventTitle, eventDesc, eventType, bannerImg, eventImage,
                 showSuccessToast(`${eventTitle} is deleted`)
             } else {
                 console.log(`Delete "${eventTitle}" canceled`);
-                showErrorToast('Something went wrong !! ')
+                showErrorToast('Delete canceled !! ')
             }
         } catch (error) {
             console.error(`error while deleting ${eventTitle}: `, error)
@@ -41,15 +40,15 @@ const BlogCard = ({ id, eventTitle, eventDesc, eventType, bannerImg, eventImage,
                 <div className="card-body grid grid-cols-3">
                     <div className='col-span-2'>
                         <h2 className="card-header">{eventTitle}</h2>
-                        <span className="badge badge-outline-secondary">
-                            {
-                                hashtags?.map((data, index) => {
-                                    return (
-                                        <p key={index} className='text-secondary' >#{data}</p>
-                                    )
-                                })
-                            }
-                        </span>
+                        {
+                            hashtags?.map((data, index) => {
+                                return (
+                                    <span key={index} className="badge badge-outline-secondary m-2">
+                                        <p className='text-secondary' >#{data}</p>
+                                    </span>
+                                )
+                            })
+                        }
                         <p className="text-content2">{truncatedDesc}</p>
                     </div>
                     <div className="card-footer col-span-1 space-x-3 flex-wrap mx-auto text-center">
@@ -79,19 +78,6 @@ const BlogCard = ({ id, eventTitle, eventDesc, eventType, bannerImg, eventImage,
                     </div>
                 </div>
             </div>
-            <EventEditModal
-                id={id}
-                eventTitle={eventTitle}
-                eventDesc={eventDesc}
-                eventType={eventType}
-                bannerImg={bannerImg}
-                eventImage={eventImage}
-                eventTimeline={eventTimeline}
-                hashtags={hashtags}
-                orgImgUrl={orgImgUrl}
-                orgName={orgName}
-                teamSize={teamSize}
-            />
         </>
     )
 }

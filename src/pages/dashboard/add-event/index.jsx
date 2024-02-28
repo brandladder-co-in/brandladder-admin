@@ -7,6 +7,7 @@ import DashBoard from '../../../components/frames/dashboard';
 
 const AddEvent = () => {
 
+    const [isLoading, setIsLoading] = useState(false);
     const [eventTitle, setEventTitle] = useState('');
     const [img, setImg] = useState('');
     const [desc, setDesc] = useState('');
@@ -14,6 +15,7 @@ const AddEvent = () => {
     const [eligibility, setEligibility] = useState('');
     const [brief, setBrief] = useState()
     const [problemStatement, setProblemStatement] = useState()
+    const [archive, setArchive] = useState(false)
     const [hashtags, setHashtags] = useState([]);
     const [teamSize, setTeamSize] = useState([{
         min: 1,
@@ -59,6 +61,8 @@ const AddEvent = () => {
 
     const handleSubmit = () => {
 
+        setIsLoading(true);
+
         try {
 
             const fieldValueCheck = eventTitle !== '' && img !== '' && bannerImg !== '' && desc !== ''
@@ -77,15 +81,19 @@ const AddEvent = () => {
                     eligibility: eligibility,
                     eventBrief: brief,
                     problemStatement: problemStatement,
+                    date: new Date(),
+                    archive: archive,
                 }
 
                 uploadEventData('events', eventTitle, eventData)
                 // console.log(eventData)
-                navigate('/dashboard/blogs')
+                navigate('/dashboard/all-events')
             }
 
         } catch (error) {
             console.error('error while uploading event: ', error)
+        } finally {
+            setIsLoading(false)
         }
     }
 
@@ -281,12 +289,33 @@ const AddEvent = () => {
                         value={teamSize[0].note}
                         onChange={(e) => setTeamSize([{ ...teamSize[0], note: e.target.value }])}
                     />
+
+                    <div className="flex items-center space-x-2">
+                        <span>Archive Event:</span>
+                        {/* <label className="switch switch-ghost-secondary">
+                            <input type="checkbox" checked={archive} onChange={() => setArchive(!archive)} />
+                            <span className="slider round"></span>
+                        </label> */}
+                        <input
+                            type="checkbox" className="switch switch-ghost-secondary"
+                            checked={archive}
+                            onChange={() => setArchive(!archive)} />
+                    </div>
+
                 </section>
 
+                {
+                    isLoading ? (
+                        <button className="btn btn-outline-secondary btn-loading w-full" onClick={handleSubmit}>
+                            Loading
+                        </button>
+                    ) : (
+                        <button className="btn btn-outline-secondary w-full" onClick={handleSubmit}>
+                            Publish Event
+                        </button>
+                    )
+                }
 
-                <button className="btn btn-outline-secondary w-full" onClick={handleSubmit}>
-                    Publish Event
-                </button>
 
             </div>
         </DashBoard>
