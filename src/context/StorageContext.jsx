@@ -1,5 +1,6 @@
 import { createContext, useContext } from "react";
-import { storage } from "../config/firebaseConfig";
+// import { storage } from "../config/firebaseConfig";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const StorageContext = createContext();
 
@@ -9,26 +10,23 @@ export function useStorage() {
 
 export function StorageProvider({ children }) {
 
-    const uploadImage = async (folderPath, imageFile) => {
+    const storageRef = ref(getStorage(), 'images');
+
+    const uploadImage = async (imageFile, dir) => {
         try {
-            // Create a reference to the storage root with the specified folder path
-            const storageRef = storage.ref().child(folderPath);
+            const imagePath = `${dir}/${imageFile.name}`;
+            const snapshot = await uploadBytes(ref(storageRef, imagePath), imageFile);
 
-            // Upload the image file to the specified folder
-            const imageRef = storageRef.child(imageFile.name);
-            await imageRef.put(imageFile);
+            // Get download URL of the uploaded image
+            const downloadURL = await getDownloadURL(snapshot.ref);
 
-            // Get the download URL for the uploaded image
-            const downloadURL = await imageRef.getDownloadURL();
-
-            console.log("Image uploaded successfully:", downloadURL);
-
-            return downloadURL; // Return the download URL of the uploaded image
+            return downloadURL;
         } catch (error) {
-            console.error("Error uploading image:", error);
-            return null;
+            console.error('Error uploading image:', error);
+            throw error;
         }
     };
+
 
     const value = {
         uploadImage

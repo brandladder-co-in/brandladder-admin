@@ -9,6 +9,8 @@ import { GrArticle } from "react-icons/gr";
 import { FaRegFileExcel } from "react-icons/fa";
 import { MdOutlineEmojiEvents, MdOutlineEventSeat } from "react-icons/md";
 import { RxAvatar } from "react-icons/rx";
+import { IoCodeSlash } from "react-icons/io5";
+import UploadImgMOdal from '../../modal/uploadimg-modal';
 
 const SidebarNavigation = ({ children }) => {
 
@@ -61,12 +63,12 @@ const SidebarNavigation = ({ children }) => {
                                     </li>
                                 </Link>
 
-                                {/* <li className="menu-item">
-                                    <Link to='/dashboard/question-bank' className='flex' >
-                                        <CiDatabase className='my-auto mx-2' />
-                                        <span>Question Bank</span>
-                                    </Link>
-                                </li> */}
+                                <li className="menu-item">
+                                    <label className='flex' htmlFor='img-upload-modal' >
+                                        <IoCodeSlash className='my-auto mx-2' />
+                                        <span>Image to URL</span>
+                                    </label>
+                                </li>
                             </ul>
                         </section>
                     </nav>
@@ -90,6 +92,7 @@ const SidebarNavigation = ({ children }) => {
                 </div>
                 {children}
             </div>
+            <UploadImgMOdal />
             <LogoutModal />
         </div>
     )
