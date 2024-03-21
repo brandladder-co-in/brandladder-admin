@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 
@@ -38,7 +38,7 @@ const LoginForm = () => {
 
                 if (found) {
                     await handleEmailSignUp(email, password);
-                    navigate('/dashboard/blogs');
+                    navigate('/dashboard/add-blogs');
                     showSuccessToast(`Login Successfully`);
                 } else {
                     showErrorToast(`Email not authorized`);
@@ -118,10 +118,10 @@ const LoginForm = () => {
                 )
             }
 
-            <small className='text-black' >
+            {/* <small className='text-black' >
                 Not registered with us ?
                 <Link to='/teacher-register' className='text-blue-600'>create now</Link>
-            </small>
+            </small> */}
         </aside>
     )
 }

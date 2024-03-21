@@ -22,8 +22,7 @@ export function FirestoreProvider({ children }) {
     const storeData = async (collectionName, docId, data) => {
         try {
             const docRef = doc(db, collectionName, docId);
-            const res = await setDoc(docRef, data);
-            return res;
+            await setDoc(docRef, data);
         } catch (error) {
             console.error("Error writing document: ", error);
         }
