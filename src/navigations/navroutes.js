@@ -1,8 +1,10 @@
-import AddBlogs from '../pages/dashboard/add-blogs';
-import EditBlogs from '../pages/dashboard/edit-blogs';
+import AddBlogs from '../pages/dashboard/blog/add-blogs';
+import EditBlogs from '../pages/dashboard/blog/edit-blogs';
 import CreateAdmin from '../pages/dashboard/create-users'
-import AddEvent from '../pages/dashboard/add-event'
-import EditEvent from '../pages/dashboard/all-events'
+import AddEvent from '../pages/dashboard/events/add-event'
+import EditEvent from '../pages/dashboard/events/add-event'
+import AddClient from '../pages/dashboard/client-dtls/add-client'
+import AllClient from '../pages/dashboard/client-dtls/all-clients'
 import Login from '../pages/auth/Login';
 
 export const UnAuthenticateRoutes = [
@@ -25,6 +27,14 @@ export const UnAuthenticateRoutes = [
     {
         path: '/dashboard/all-events',
         element: <EditEvent />,
+    },
+    {
+        path: '/dashboard/add-client',
+        element: <AddClient />,
+    },
+    {
+        path: '/dashboard/all-clients',
+        element: <AllClient />,
     },
 ]
 

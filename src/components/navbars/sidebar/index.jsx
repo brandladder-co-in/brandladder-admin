@@ -25,47 +25,111 @@ const SidebarNavigation = ({ children }) => {
                 <section className="sidebar-content">
                     <nav className="menu rounded-md">
                         <section className="menu-section px-4">
-                            <span className="menu-title">Main menu</span>
                             <ul className="menu-items">
 
-                                <Link to='/dashboard/add-blogs' className='flex' >
-                                    <li className="menu-item">
-                                        <FaRegFileExcel className='my-auto mx-2' />
-                                        <span>Add New Article</span>
-                                    </li>
-                                </Link>
+                                <li>
+                                    <input type="checkbox" id="blog-menu" className="menu-toggle" />
+                                    <label className="menu-item justify-between" htmlFor="blog-menu">
+                                        <div className="flex gap-2">
+                                            {/* <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 opacity-75" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                            </svg> */}
+                                            <span>Articles Section</span>
+                                        </div>
 
-                                <Link to='/dashboard/blogs' className='flex' >
-                                    <li className="menu-item">
-                                        <GrArticle className='my-auto mx-2' />
-                                        <span>All Blogs</span>
-                                    </li>
-                                </Link>
+                                        <span className="menu-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                            </svg>
+                                        </span>
+                                    </label>
 
-                                <Link to='/dashboard/add-event' className='flex' >
-                                    <li className="menu-item">
-                                        <MdOutlineEmojiEvents className='my-auto mx-2' />
-                                        <span>Add New Event</span>
-                                    </li>
-                                </Link>
+                                    <div className="menu-item-collapse">
+                                        <div className="min-h-0">
+                                            <Link to='/dashboard/add-blogs' className='flex menu-item' >
+                                                <FaRegFileExcel className='my-auto mx-2' />
+                                                <span>Add New Article</span>
+                                            </Link>
+                                            <Link to='/dashboard/blogs' className='flex menu-item' >
+                                                <GrArticle className='my-auto mx-2' />
+                                                <span>All Blogs</span>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </li>
 
-                                <Link to='/dashboard/all-events' className='flex' >
-                                    <li className="menu-item">
-                                        <MdOutlineEventSeat className='my-auto mx-2' />
-                                        <span>All Events</span>
-                                    </li>
-                                </Link>
+                                <li>
+                                    <input type="checkbox" id="events-menu" className="menu-toggle" />
+                                    <label className="menu-item justify-between" htmlFor="events-menu">
+                                        <div className="flex gap-2">
+                                            {/* <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 opacity-75" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                            </svg> */}
+                                            <span>Events Section</span>
+                                        </div>
 
-                                <Link to='/dashboard/create-user' className='flex' >
-                                    <li className="menu-item">
-                                        <RxAvatar className='my-auto mx-2' />
+                                        <span className="menu-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                            </svg>
+                                        </span>
+                                    </label>
+
+                                    <div className="menu-item-collapse">
+                                        <div className="min-h-0">
+                                            <Link to='/dashboard/add-events' className='flex menu-item' >
+                                                <MdOutlineEmojiEvents className='my-auto mx-2' />
+                                                <span>Add New Event</span>
+                                            </Link>
+                                            <Link to='/dashboard/all-events' className='flex menu-item' >
+                                                <MdOutlineEventSeat className='my-auto mx-2' />
+                                                <span>All Events</span>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <input type="checkbox" id="client-menu" className="menu-toggle" />
+                                    <label className="menu-item justify-between" htmlFor="client-menu">
+                                        <div className="flex gap-2">
+                                            {/* <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 opacity-75" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                            </svg> */}
+                                            <span>Clients Details</span>
+                                        </div>
+
+                                        <span className="menu-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                                            </svg>
+                                        </span>
+                                    </label>
+
+                                    <div className="menu-item-collapse">
+                                        <div className="min-h-0">
+                                            <Link to='/dashboard/add-client' className='flex menu-item' >
+                                                <MdOutlineEmojiEvents className='my-auto mx-2' />
+                                                <span>Add New Client</span>
+                                            </Link>
+                                            <Link to='/dashboard/all-clients' className='flex menu-item' >
+                                                <MdOutlineEventSeat className='my-auto mx-2' />
+                                                <span>All Clients</span>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li className="menu-item">
+                                    <Link to='/dashboard/create-user' className='flex' >
+                                        <RxAvatar className='my-auto mr-2' />
                                         <span>Create New Admins</span>
-                                    </li>
-                                </Link>
+                                    </Link>
+                                </li>
 
                                 <li className="menu-item">
                                     <label className='flex' htmlFor='img-upload-modal' >
-                                        <IoCodeSlash className='my-auto mx-2' />
+                                        <IoCodeSlash className='my-auto mr-2' />
                                         <span>Image to URL</span>
                                     </label>
                                 </li>

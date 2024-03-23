@@ -2,8 +2,8 @@ import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import JoditEditor from 'jodit-react';
 
-import { useFirestore } from '../../../context/FirestoreContext';
-import DashBoard from '../../../components/frames/dashboard';
+import { useFirestore } from '../../../../context/FirestoreContext';
+import DashBoard from '../../../../components/frames/dashboard';
 
 const AddEvent = () => {
 

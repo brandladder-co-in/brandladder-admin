@@ -7,10 +7,9 @@ import { showSuccessToast, showErrorToast } from '../../../tosters/natifications
 
 const BlogDtls = () => {
 
-    // const [activeTab, setActiveTab] = useState('editor');
     const [authorData, setAuthorData] = useState()
     const [title, setTitle] = useState('');
-    const [metaTags, setMetaTags] = useState('');
+    const [metaTags, setMetaTags] = useState([]);
     const [focusKeywords, setFocusKeywords] = useState('');
     const [desc, setDesc] = useState('');
     const [img, setImg] = useState('');
@@ -19,12 +18,17 @@ const BlogDtls = () => {
     const [aditionalURL, setAditionalURL] = useState('');
     const [htmlcontent, setHtmlContent] = useState('');
     const [archiveState, setArchiveState] = useState(true);
-    // const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     const { storeData: uploadBlog, getDocumentData: getAuthorData } = useFirestore()
     const navigate = useNavigate();
     const { currentUser } = useEmailAuth();
     const editor = useRef(null);
+
+    const handleMetaTagsChange = (e) => {
+        const tags = e.target.value.split(',');
+        setMetaTags(tags);
+    };
 
     const blogData = {
         blogTitle: title,
@@ -33,7 +37,7 @@ const BlogDtls = () => {
         blogDesc: desc,
         titleImage: img,
         writerName: author,
-        writerEmail: currentUser.email,
+        writerEmail: currentUser ? currentUser.email : 'ritwik',
         domain: dom,
         date: new Date().toISOString(),
         blogContent: htmlcontent,
@@ -41,16 +45,6 @@ const BlogDtls = () => {
         aditionalURL: aditionalURL,
         authorData: authorData,
     };
-
-    // const handleMetaTagsChange = (e) => {
-    //     // const tags = e.target.value.split(',');
-    //     setMetaTags(e);
-    // };
-
-    // const handleFocusKeywoerdsChange = (e) => {
-    //     // const tags = e.target.value.split(',');
-    //     setFocusKeywords(e);
-    // };
 
     const handleKeyDown = (event, editor) => {
         // const selection = editor.selection;
@@ -84,6 +78,8 @@ const BlogDtls = () => {
     }
 
     const handleSubmit = async () => {
+
+        setIsLoading(true)
         try {
             // const currentDate = new Date().toISOString()
 
@@ -98,6 +94,8 @@ const BlogDtls = () => {
         } catch (error) {
             console.log('error while uploading blog: ', error);
             showErrorToast('Somwething went wrong !!')
+        } finally {
+            setIsLoading(true)
         }
     }
 
@@ -138,9 +136,8 @@ const BlogDtls = () => {
                                     id="metaTags"
                                     type="text"
                                     placeholder="Enter meta tags"
-                                    value={metaTags}
-                                    // value={metaTags.join(',')}
-                                    onChange={(e) => { setMetaTags(e.target.value) }}
+                                    value={metaTags.join(',')}
+                                    onChange={handleMetaTagsChange}
                                 />
                             </div>
                             <div className="mb-4">
@@ -259,21 +256,7 @@ const BlogDtls = () => {
                             </div>
                         </div>
                         <div className="max-w-5xl bg-gray-2 mx-auto px-10 py-4">
-                            {/* <div className="tabs mx-auto mb-6">
-                    <div className="tabs tabs-boxed space-x-2">
-                        <input type="radio" id="tab-13" name="tab-5" className="tab-toggle" defaultChecked />
-                        <label htmlFor="tab-13" className="tab" onClick={() => handleTabChange('editor')}>
-                            Text Editor
-                        </label>
-
-                        <input type="radio" id="tab-14" name="tab-5" className="tab-toggle" />
-                        <label htmlFor="tab-14" className="tab" onClick={() => handleTabChange('text')}>
-                            Upload Document
-                        </label>
-                    </div>
-                </div> */}
                             <div className="tab-content max-w-full ">
-                                {/* {activeTab === 'editor' && ( */}
                                 <JoditEditor
                                     className='text-black w-1'
                                     ref={editor}
@@ -287,18 +270,21 @@ const BlogDtls = () => {
                                         });
                                     }}
                                 />
-                                {/* )} */}
-                                {/* {activeTab === 'text' && (
-                        <div className="mt-4">
-                            <div dangerouslySetInnerHTML={{ __html: htmlcontent }} />
-                        </div>
-                    )} */}
                             </div>
-                            <button
-                                className='btn btn-outline-secondary w-full mx-auto text-center mt-10'
-                                onClick={handleSubmit}>
-                                Submit Quiz
-                            </button>
+                            {
+                                isLoading ? (
+                                    <button
+                                        className='btn btn-outline-secondary w-full mx-auto text-center mt-10'>
+                                        Loading ...
+                                    </button>
+                                ) : (
+                                    <button
+                                        className='btn btn-outline-secondary w-full mx-auto text-center mt-10'
+                                        onClick={handleSubmit}>
+                                        Add Blog
+                                    </button>
+                                )
+                            }
                         </div>
                     </>
                 ) : (

@@ -1,6 +1,6 @@
 import React from 'react';
-import DashBoard from '../../../components/frames/dashboard';
-import BlogDtls from '../../../components/forms/add-blogs/blog-dtls';
+import DashBoard from '../../../../components/frames/dashboard';
+import BlogDtls from '../../../../components/forms/add-blogs/blog-dtls';
 
 const AddBlogs = () => {
 
